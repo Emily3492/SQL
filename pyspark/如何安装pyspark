@@ -1,0 +1,28 @@
+1、安装jdk，解压spark，安装anaconda
+2、配置JAVA环境:在默认目录下:(wangyiyandeMacBook-Pro:~ wyy$)
+vim .bash_profile
+JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home
+CLASSPAHT=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+PATH=$JAVA_HOME/bin:$PATH:
+export JAVA_HOME
+export CLASSPATH
+export PATH
+3、配置spark环境:在默认目录下:(wangyiyandeMacBook-Pro:~ wyy$)
+vim .bash_profile
+#SPARK VARIABLES START
+export SPARK_HOME=/Library/spark-2.1.0-bin-hadoop2.7
+export PATH=$PATH:$SPARK_HOME/bin
+4、修改spark参数：
+cd /Library/spark-2.1.0-bin-hadoop2.7/conf
+mv spark-env.sh.template spark-env.sh
+vim slaves.template
+#在文件的最后添加如下信息，最后一行
+master
+5、检验安装结果：
+cd /Library/spark-2.1.0-bin-hadoop2.7/sbin
+./start-all.sh
+jps
+6、若想将pyspark使用ipython而不是python:
+cd /Library/spark-2.1.0-bin-hadoop2.7/bin
+vim pyspark
+#改成:PYSPARK_DRIVER_PYTHON="${PYSPARK_PYTHON:-"ipython"}"
